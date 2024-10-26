@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Authentication Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Are you the Owner?</h1>
+        <form method="post">
+            <label for="auth_string">Please enter the string displayed on the LCD:</label>
+            <input type="text" id="auth_string" name="auth_string" required>
+            <button type="submit">Submit</button>
+            {% if error %}
+            <p style="color: red;">{{ error }}</p>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>

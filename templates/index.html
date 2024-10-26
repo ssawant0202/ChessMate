@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chess Game Settings</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function incrementValue(inputId, maxValue) {
+            var input = document.getElementById(inputId);
+            var value = parseInt(input.value);
+            if (value < maxValue) {
+                input.value = value + 1;
+            }
+        }
+
+        function decrementValue(inputId, minValue) {
+            var input = document.getElementById(inputId);
+            var value = parseInt(input.value);
+            if (value > minValue) {
+                input.value = value - 1;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <div class="container">
+            <h1>Choose Chess Game Settings</h1>
+            <form method="post">
+                <label for="color">Choose Color:</label>
+                <select name="color" id="color">
+                    {% for color in colors %}
+                    <option value="{{ color }}">{{ color }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+
+                <label for="time_limit">Choose Time Limit:</label>
+                <div class="time-control">
+                    <button type="button" onclick="decrementValue('time_limit', 5)">-</button>
+                    <input type="number" id="time_limit" name="time_limit" value="5" min="5" max="60">
+                    <button type="button" onclick="incrementValue('time_limit', 60)">+</button>
+                </div>
+                <br><br>
+
+                <label for="time_increment">Choose Time Increment:</label>
+                <div class="time-control">
+                    <button type="button" onclick="decrementValue('time_increment', 0)">-</button>
+                    <input type="number" id="time_increment" name="time_increment" value="0" min="0" max="60">
+                    <button type="button" onclick="incrementValue('time_increment', 60)">+</button>
+                </div>
+                <br><br>
+
+                <label for="difficulty">Choose Difficulty:</label>
+                <select name="difficulty" id="difficulty">
+                    {% for difficulty in difficulties %}
+                    <option value="{{ difficulty }}">{{ difficulty }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+
+                <button type="submit">Start Game</button>
+            </form>
+        </div>
+
+        
+        <div class="logout-container">
+            <form method="post" action="{{ url_for('logout') }}">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>
